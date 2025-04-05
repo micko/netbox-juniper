@@ -10,9 +10,6 @@
 <a href="https://github.com/micko/netbox-juniper/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/micko/netbox-juniper?color=2b9348"></a>
 <a href="https://github.com/micko/netbox-juniper/blob/master/LICENSE"><img src="https://img.shields.io/github/license/micko/netbox-juniper?color=2b9348" alt="License Badge"/></a>
 <a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code Style Black"/></a>
-<a href="https://pepy.tech/project/netbox-juniper"><img alt="Downloads" src="https://static.pepy.tech/badge/netbox-juniper"></a>
-<a href="https://pepy.tech/project/netbox-juniper"><img alt="Downloads/Week" src="https://static.pepy.tech/badge/netbox-juniper/month"></a>
-<a href="https://pepy.tech/project/netbox-juniper"><img alt="Downloads/Month" src="https://static.pepy.tech/badge/netbox-juniper/week"></a>
 </div>
 
 ## Objectives
