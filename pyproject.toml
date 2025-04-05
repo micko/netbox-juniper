@@ -1,0 +1,37 @@
+[project]
+name = "netbox-juniper"
+version = "0.1"
+description = "Juniper Networks Plugin for NetBox."
+authors = [
+    {name="Dragan Mickovic", email="dmickovic@gmail.com"},
+]
+license = "LICENCE"
+readme = "README.md"
+keywords = ["netbox", "netbox-plugin", "juniper"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    'Intended Audience :: Developers',
+    'Natural Language :: English',
+    "Programming Language :: Python :: 3 :: Only",
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+]
+dependencies = []
+requires-python = ">=3.10"
+
+[project.urls]
+Homepage = "https://github.com/micko/netbox-juniper"
+Documentation = "https://github.com/micko/netbox-juniper/blob/main/docs/using_netbox_juniper.md"
+Repository = "https://github.com/micko/netbox-juniper"
+Issues = "https://github.com/micko/netbox-juniper/issues"
+
+[build-system]
+requires = ['setuptools']
+build-backend = 'setuptools.build_meta'
+
+[tool.setuptools.packages.find]
+exclude = ["examples*", "media*", "*.tests*"]
+
+[tool.setuptools.package-data]
+"netbox_dns" = ["templates/**/*.html", "locale/**/*.mo"]

@@ -1,0 +1,5 @@
+version: 0.1
+package_name: netbox-juniper
+compatibility:
+  - release: 0.1
+    netbox_min: 4.2.5
