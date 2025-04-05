@@ -1,6 +1,20 @@
 # NetBox Juniper
 [Netbox](https://github.com/netbox-community/netbox) plugin for [Juniper Networks](https://www.juniper.net) device configuration components.
 
+<div align="center">
+<a href="https://pypi.org/project/netbox-juniper/"><img src="https://img.shields.io/pypi/v/netbox-juniper" alt="PyPi"/></a>
+<a href="https://github.com/micko/netbox-juniper/stargazers"><img src="https://img.shields.io/github/stars/micko/netbox-juniper?style=flat" alt="Stars Badge"/></a>
+<a href="https://github.com/micko/netbox-juniper/network/members"><img src="https://img.shields.io/github/forks/micko/netbox-juniper?style=flat" alt="Forks Badge"/></a>
+<a href="https://github.com/micko/netbox-juniper/issues"><img src="https://img.shields.io/github/issues/micko/netbox-juniper" alt="Issues Badge"/></a>
+<a href="https://github.com/micko/netbox-juniper/pulls"><img src="https://img.shields.io/github/issues-pr/micko/netbox-juniper" alt="Pull Requests Badge"/></a>
+<a href="https://github.com/micko/netbox-juniper/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/micko/netbox-juniper?color=2b9348"></a>
+<a href="https://github.com/micko/netbox-juniper/blob/master/LICENSE"><img src="https://img.shields.io/github/license/micko/netbox-juniper?color=2b9348" alt="License Badge"/></a>
+<a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code Style Black"/></a>
+<a href="https://pepy.tech/project/netbox-juniper"><img alt="Downloads" src="https://static.pepy.tech/badge/netbox-juniper"></a>
+<a href="https://pepy.tech/project/netbox-juniper"><img alt="Downloads/Week" src="https://static.pepy.tech/badge/netbox-juniper/month"></a>
+<a href="https://pepy.tech/project/netbox-juniper"><img alt="Downloads/Month" src="https://static.pepy.tech/badge/netbox-juniper/week"></a>
+</div>
+
 ## Objectives
 NetBox Juniper Plugin is designed to help with the configuration of certain Juniper Networks specific configuration objects.
 

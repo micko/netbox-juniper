@@ -5,7 +5,7 @@ description = "Juniper Networks Plugin for NetBox."
 authors = [
     {name="Dragan Mickovic", email="dmickovic@gmail.com"},
 ]
-license = "LICENCE"
+license = {file="LICENCE"}
 readme = "README.md"
 keywords = ["netbox", "netbox-plugin", "juniper"]
 classifiers = [
