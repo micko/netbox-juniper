@@ -1,0 +1,38 @@
+name: Python Syntax
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - '**.py'
+      - 'pyproject.toml'
+      - '.github/workflows/python-syntax.yml'
+  pull_request:
+    paths:
+      - '**.py'
+      - 'pyproject.toml'
+      - '.github/workflows/python-syntax.yml'
+
+jobs:
+  format:
+    name: Black
+    runs-on: ubuntu-latest
+    steps:
+      - id: setup
+        name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - id: install
+        name: Install Deps
+        run: pip3 install black==22.3.0
+
+      - id: checkout
+        name: Checkout PR
+        uses: actions/checkout@v4
+
+      - id: check
+        name: Check format
+        run: black --check .
