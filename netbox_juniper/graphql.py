@@ -4,7 +4,7 @@ from netbox.graphql.fields import ObjectField, ObjectListField
 from . import filtersets, models
 
 
-class AccessListType(NetBoxObjectType):
+class FirewallFilterType(NetBoxObjectType):
 
     class Meta:
         model = models.FirewallFilter
