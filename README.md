@@ -20,7 +20,7 @@ This module is Alpha at best - USE AT YOUR OWN RISK.
 
 ## Requirements
 * NetBox 4.2.5 or higher
-* Python 3.10 or higher
+* Python 3.12 or higher
 
 ## HowTo
 
@@ -37,11 +37,11 @@ Add the plugin to the NetBox config: `configuration.py`
 
 ```python
 PLUGINS = [
-    "netbox_juniper",
+    'netbox_juniper',
 ]
 ```
 
-Permanently keep the plugin installed `upgrade.sh`:
+Permanently keep the plugin installed when using `upgrade.sh`:
 
 ```
 echo netbox-juniper >> local_requirements.txt
