@@ -8,5 +8,4 @@ app_name = 'netbox_juniper'
 router = NetBoxRouter()
 router.register('firewall-filter', views.FirewallFilterViewSet)
 
-
 urlpatterns = router.urls

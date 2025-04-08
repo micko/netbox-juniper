@@ -1,16 +1,21 @@
 from graphene import ObjectType
 from netbox.graphql.types import NetBoxObjectType
 from netbox.graphql.fields import ObjectField, ObjectListField
-from . import filtersets, models
+
+from netbox_juniper.models import *
+from netbox_juniper.filtersets import *
 
 
 class FirewallFilterType(NetBoxObjectType):
 
     class Meta:
-        model = models.FirewallFilter
+        model = FirewallFilter
         fields = '__all__'
 
 
 class Query(ObjectType):
-    firewall_filter = ObjectField(FirewallFilterType)
-    firewall_filter_list = ObjectListField(FirewallFilterType)
+    firewallfilter = ObjectField(FirewallFilterType)
+    firewallfilter_list = ObjectListField(FirewallFilterType)
+
+
+schema = Query

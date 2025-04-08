@@ -1,23 +1,18 @@
-from rest_framework import serializers
-from netbox.api.serializers import NetBoxModelSerializer, WritableNestedSerializer
-from .. models import FirewallFilter
+from rest_framework.serializers import HyperlinkedIdentityField, ValidationError
+from netbox.api.serializers import NetBoxModelSerializer
+from netbox_juniper.models import *
 
 
 class FirewallFilterSerializer(NetBoxModelSerializer):
-    url = serializers.HyperlinkedIdentityField(
+    url = HyperlinkedIdentityField(
         view_name='plugins-api:netbox_juniper-api:firewallfilter-detail'
     )
 
     class Meta:
         model = FirewallFilter
-        fields = ('id', 'url', 'device', 'name', 'family', 'description', 'tags', 'created', 'last_updated')
-
-
-class NestedFirewallFilterSerializer(WritableNestedSerializer):
-    url = serializers.HyperlinkedIdentityField(
-        view_name='plugins-api:netbox_juniper-api:firewallfilter-detail'
-    )
-
-    class Meta:
-        model = FirewallFilter
-        fields = ('id', 'device', 'name', 'family', 'description')
+        fields = (
+            'id', 'url', 'display', 'name', 'device', 'family', 'comments', 'tags', 'custom_fields', 'created', 'last_updated',
+        )
+        brief_fields = (
+            'id', 'url', 'display', 'name',
+        )

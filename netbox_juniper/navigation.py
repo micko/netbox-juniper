@@ -1,7 +1,5 @@
-from netbox.plugins.utils import get_plugin_config
 from django.utils.translation import gettext_lazy as _
 from netbox.plugins import PluginMenuButton, PluginMenuItem, PluginMenu
-
 
 firewall_filter_item = PluginMenuItem(
     link="plugins:netbox_juniper:firewallfilter_list",
@@ -12,11 +10,6 @@ firewall_filter_item = PluginMenuItem(
             _("Add"),
             'mdi mdi-plus-thick',
         ),
-#        PluginMenuButton(
-#            'plugins:netbox_juniper:firewallfilter_import',
-#            _("Import"),
-#            'mdi mdi-upload',
-#        ),
     ),
 )
 
