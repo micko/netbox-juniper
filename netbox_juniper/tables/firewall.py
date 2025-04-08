@@ -8,8 +8,11 @@ from netbox.tables import (
     ActionsColumn,
 )
 
-from netbox_juniper.models import *
+from netbox_juniper.models.firewall import *
 
+#
+# Firewall Filter
+#
 
 class FirewallFilterTable(NetBoxTable):
     name = tables.Column(
@@ -27,3 +30,19 @@ class FirewallFilterTable(NetBoxTable):
         model = FirewallFilter
         fields = ('pk', 'id', 'name', 'device', 'family', 'term_count', 'comments', 'actions')
         default_columns = ('name', 'device', 'family', 'term_count')
+
+#
+# Firewall Policer
+#
+
+class FirewallPolicerTable(NetBoxTable):
+    name = tables.Column(
+        linkify=True
+    )
+    device = tables.LinkColumn()
+
+    class Meta(NetBoxTable.Meta):
+        model = FirewallPolicer
+        fields = ('pk', 'id', 'name', 'device', 'comments', 'actions')
+        default_columns = ('name', 'device')
+
