@@ -90,7 +90,7 @@ class FirewallPolicerForm(NetBoxModelForm):
 
     class Meta:
         model = FirewallPolicer
-        fields = ('device', 'name', 'comments', 'tags')
+        fields = ('device', 'name', 'bw_limit', 'bw_percent', 'burst_limit', 'comments', 'tags')
 
 
 class FirewallPolicerFilterForm(NetBoxModelFilterSetForm):
@@ -120,5 +120,4 @@ class FirewallPolicerImportForm(NetBoxModelImportForm):
 
     class Meta:
         model = FirewallPolicer
-        fields = ("device", "name", "tags")
-
+        fields = ("device", "name", "bw_limit", "bw_percent", "burst_limit", "tags")

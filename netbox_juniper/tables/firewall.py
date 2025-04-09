@@ -43,6 +43,6 @@ class FirewallPolicerTable(NetBoxTable):
 
     class Meta(NetBoxTable.Meta):
         model = FirewallPolicer
-        fields = ('pk', 'id', 'name', 'device', 'comments', 'actions')
+        fields = ('pk', 'id', 'name', 'device', 'bw_limit', 'bw_percent', 'burst_limit' 'comments', 'actions')
         default_columns = ('name', 'device')
 

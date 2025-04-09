@@ -58,8 +58,44 @@ class FirewallFilterIndex(SearchIndex):
 #
 
 class FirewallPolicer(NetBoxModel):
-    name = models.CharField(max_length=64, blank=False)
-    device = models.ForeignKey('dcim.Device', on_delete=models.CASCADE)
+    name = models.CharField(
+        max_length=64,
+        blank=False
+    )
+    device = models.ForeignKey(
+        to='dcim.Device',
+        on_delete=models.CASCADE,
+    )
+    bw_limit = models.PositiveIntegerField(
+        blank=True,
+        null=True,
+        verbose_name=_('bandwidth limit (bps)'),
+        help_text=_("bandwidth limit - bits per second")
+    )
+    bw_percent = models.PositiveIntegerField(
+        blank=True,
+        null=True,
+        verbose_name=_('bandwidth percentage'),
+        help_text=_("bandwidth percentage")
+    )
+    burst_limit = models.PositiveIntegerField(
+        blank=True,
+        null=True,
+        verbose_name=_('burst size limit'),
+        help_text=_("burst size limit - bytes")
+    )
+    filter_specific = models.BooleanField(
+        default=False,
+        verbose_name="Filter Specific?"
+    )
+    # need to provide future options for forwarding-class, loss-priority, out-of-profile, etc.
+    action =  models.CharField(max_length=20,
+        blank=False,
+        choices=[
+            ('discard', 'Discard'),
+        ]
+    )
+
     comments = models.TextField(blank=True)
 
     class Meta:
