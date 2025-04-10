@@ -15,3 +15,6 @@ class FirewallPolicerViewSet(NetBoxModelViewSet):
     queryset = FirewallPolicer.objects.prefetch_related('tags')
     serializer_class = FirewallPolicerSerializer
 
+class SecurityZoneViewSet(NetBoxModelViewSet):
+    queryset = SecurityZone.objects.prefetch_related('tags')
+    serializer_class = SecurityZoneSerializer

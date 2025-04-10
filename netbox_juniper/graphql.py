@@ -26,6 +26,20 @@ class FirewallPolicerType(NetBoxObjectType):
         model = FirewallPolicer
         fields = '__all__'
 
+#
+# Security Zone
+#
+
+class SecurityZoneType(NetBoxObjectType):
+
+    class Meta:
+        model = SecurityZone
+        fields = '__all__'
+
+
+#
+# Query
+#
 
 class Query(ObjectType):
     firewallfilter = ObjectField(FirewallFilterType)
@@ -34,5 +48,7 @@ class Query(ObjectType):
     firewallpolicer = ObjectField(FirewallPolicerType)
     firewallpolicer_list = ObjectListField(FirewallPolicerType)
 
+    securityzone = ObjectField(SecurityZoneType)
+    securityzone_list = ObjectListField(SecurityZoneType)
 
 schema = Query

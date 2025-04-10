@@ -31,4 +31,16 @@ urlpatterns = (
         'model': FirewallPolicer
     }),
 
+    # Security Zone
+    path('security-zone/', SecurityZoneListView.as_view(), name='securityzone_list'),
+    path('security-zone/add/', SecurityZoneEditView.as_view(), name='securityzone_add'),
+    path('security-zone/import/', SecurityZoneBulkImportView.as_view(), name='securityzone_import'),
+    path('security-zone/edit/', SecurityZoneBulkEditView.as_view(), name='securityzone_bulk_edit'),
+    path('security-zone/<int:pk>/', SecurityZoneView.as_view(), name='securityzone'),
+    path('security-zone/<int:pk>/edit/', SecurityZoneEditView.as_view(), name='securityzone_edit'),
+    path('security-zone/<int:pk>/delete/', SecurityZoneDeleteView.as_view(), name='securityzone_delete'),
+    path('security-zone/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='securityzone_changelog', kwargs={
+        'model': SecurityZone
+    }),
+
 )

@@ -39,3 +39,22 @@ class FirewallPolicerSerializer(NetBoxModelSerializer):
             'id', 'url', 'display', 'name',
         )
 
+#
+# Security Zone
+#
+
+class SecurityZoneSerializer(NetBoxModelSerializer):
+    url = HyperlinkedIdentityField(
+        view_name='plugins-api:netbox_juniper-api:securityzone-detail'
+    )
+
+    class Meta:
+        model = SecurityZone
+        fields = (
+            'id', 'url', 'display', 'name', 'device', 'interfaces', 'host_inbound_traffic_protocols', 'host_inbound_traffic_services',
+            'application_tracking', 'enable_reverse_reroute', 'tcp_rst', 'unidirectional_session_refreshing', 'description', 
+            'comments', 'tags', 'custom_fields', 'created', 'last_updated',
+        )
+        brief_fields = (
+            'id', 'url', 'display', 'name',
+        )

@@ -1,0 +1,73 @@
+{% extends 'generic/object.html' %}
+{% block content %}
+  <div class="row mb-3">
+    <div class="col col-md-6">
+      <div class="card">
+        <h5 class="card-header">Security Zone</h5>
+        <div class="card-body">
+          <table class="table table-hover attr-table">
+            <tr>
+              <th scope="row">Name</th>
+              <td>{{ object.name }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Device</th>
+              <td>{{ object.device | linkify }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Interfaces</th>
+              <td>
+                  {% for interface in object.interfaces.all %}
+                    {{ interface }}
+                  {% endfor %}
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Description</th>
+              <td>{{ object.description }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Protocols</th>
+              <td>
+                {% for protocol in object.host_inbound_traffic_protocols %}
+                {{ protocol }}
+                {% endfor %}
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Services</th>
+              <td>
+                {% for service in object.host_inbound_traffic_services %}
+                {{ service }}<br />
+                {% endfor %}
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Application Tracking</th>
+              <td>{{ object.application_tracking }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Enable Reverse route lookup</th>
+              <td>{{ object.enable_reverse_reroute }}</td>
+            </tr>
+
+            <tr>
+              <th scope="row">Send RST for NON-SYN packet not matching TCP session</th>
+              <td>{{ object.tcp_rst }}</td>
+            </tr>
+
+            <tr>
+              <th scope="row">Enable unidirectional session refreshing</th>
+              <td>{{ object.unidirectional_session_refreshing }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      {% include 'inc/panels/custom_fields.html' %}
+    </div>
+    <div class="col col-md-6">
+      {% include 'inc/panels/tags.html' %}
+      {% include 'inc/panels/comments.html' %}
+    </div>
+  </div>
+{% endblock content %}

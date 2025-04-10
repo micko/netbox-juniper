@@ -35,6 +35,27 @@ firewall_policer_item = PluginMenuItem(
     ),
 )
 
+# 
+# Security
+#
+
+security_zone_item = PluginMenuItem(
+    link="plugins:netbox_juniper:securityzone_list",
+    link_text=_("Zones"),
+    buttons=(
+        PluginMenuButton(
+            'plugins:netbox_juniper:securityzone_add',
+            _("Add"),
+            'mdi mdi-plus-thick',
+        ),
+        PluginMenuButton(
+            link='plugins:netbox_juniper:securityzone_import',
+            title='Import',
+            icon_class='mdi mdi-upload',
+        ),
+    ),
+)
+
 
 menu = PluginMenu(
     label='Juniper Networks',
@@ -44,6 +65,12 @@ menu = PluginMenu(
             (
                 firewall_filter_item,
                 firewall_policer_item,
+            ),
+        ),
+        (
+            _("Security"),
+            (
+                security_zone_item,
             ),
         ),
     ),
