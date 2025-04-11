@@ -23,6 +23,22 @@ class SecurityZoneHostInboundTrafficProtocolsChoices(ChoiceSet):
     CHOICES = [
         ('all','All Protocols'),
         ('bfd','Bidirectional Forwarding Detection'),
+        ('bgp','Border Gateway Protocol'),
+        ('dvmrp','Distance Vector Multicast Routing Protocol'),
+        ('igmp','Internet Group Management Protocol'),
+        ('ldp','Label Distribution Protocol'),
+        ('msdp','Multicast Source Discovery Protocol'),
+        ('nhrp','Next Hop Resolution Protocol'),
+        ('ospf','Open Shortest Path First'),
+        ('ospf3','Open Shortest Path First version 3'),
+        ('pgm','Pragmatic General Multicast'),
+        ('pim','Protocol Independent Multicast'),
+        ('rip','Routing Information Protocol'),
+        ('ripng','Routing Information Protocol next generation'),
+        ('router-discovery','Router Discovery'),
+        ('rsvp','Resource Reservation Protocol'),
+        ('sap','Session Announcement Protocol'),
+        ('vrrp','Virtual Router Redundancy Protocol'),
     ]
 
 
@@ -35,7 +51,41 @@ class SecurityZoneHostInboundTrafficServicesChoices(ChoiceSet):
 
     CHOICES = [
         ('all','All System Services'),
-        ('any_service','Enable services on entire port range'),
+        ('any-service','Enable services on entire port range'),
+        ('appqoe','APPQOE active probe service'),
+        ('bootp','Bootp and dhcp relay-agent service'),
+        ('dhcp','Dynamic Host Configuration Protocol'),
+        ('dhcpv6','Enable Dynamic Host Configuration Protocol for IPv6'),
+        ('dns','DNS service'),
+        ('finger','Finger service'),
+        ('ftp','FTP service'),
+        ('high-availability','High Availability service'),
+        ('http','Web management service using HTTP'),
+        ('https','Web management service using HTTP secured by SSL'),
+        ('ident-reset','Send back TCP RST to IDENT request for port 113'),
+        ('ike','Internet Key Exchange'),
+        ('lsping','Label Switched Path ping service'),
+        ('lsselfping','Label Switched Path self ping service'),
+        ('netconf','NETCONF service'),
+        ('ntp','Network Time Protocol service'),
+        ('ping','Internet Control Message Protocol echo requests'),
+        ('r2cp','Enable Radio-Router Control Protocol service'),
+        ('reverse-ssh','Reverse SSH service'),
+        ('reverse-telnet','Reverse telnet service'),
+        ('rlogin','Rlogin service'),
+        ('rpm','Real-time performance monitoring'),
+        ('rsh','Rsh service'),
+        ('snmp','Simple Network Management Protocol service'),
+        ('snmp-trap','Simple Network Management Protocol traps'),
+        ('ssh','SSH service'),
+        ('tcp-encap','Tcp encapsulation service'),
+        ('telnet','Telnet service'),
+        ('tftp','TFTP service'),
+        ('traceroute','Traceroute service'),
+        ('webapi-clear-text','Webapi service using http'),
+        ('webapi-ssl','Webapi service using HTTP secured by SSL'),
+        ('xnm-clear-text','JUNOScript API for unencrypted traffic over TCP'),
+        ('xnm-ssl','JUNOScript API service over SSL'),
     ]
 
 
@@ -61,12 +111,12 @@ class SecurityZone(NetBoxModel):
     )
 
     host_inbound_traffic_protocols = ArrayField(
-        models.CharField(max_length=256, blank=True, choices=SecurityZoneHostInboundTrafficProtocolsChoices),
+        models.CharField(max_length=512, blank=True, choices=SecurityZoneHostInboundTrafficProtocolsChoices),
         default=list,
         blank=True,
     )
     host_inbound_traffic_services = ArrayField(
-        models.CharField(max_length=256, blank=True, choices=SecurityZoneHostInboundTrafficServicesChoices),
+        models.CharField(max_length=512, blank=True, choices=SecurityZoneHostInboundTrafficServicesChoices),
         default=list,
         blank=True,
     )
