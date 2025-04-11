@@ -215,7 +215,7 @@ class AddressBookAddress(NetBoxModel):
         ordering = ['device','name']
         constraints = [
             models.UniqueConstraint(
-                fields=['device','name','address','is_global','security_zone'],
+                fields=['device','name','is_global','security_zone'],
                 name='unique_security_addressbook_address'
             )
         ]
@@ -283,7 +283,7 @@ class AddressBookAddressSet(NetBoxModel):
         ordering = ['device','name']
         constraints = [
             models.UniqueConstraint(
-                fields=['device','name','address','is_global','security_zone'],
+                fields=['device','name','is_global','security_zone'],
                 name='unique_security_addressbook_address_set'
             )
         ]
