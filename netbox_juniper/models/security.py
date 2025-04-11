@@ -6,11 +6,10 @@ from django.utils.translation import gettext_lazy as _
 from utilities.choices import ChoiceSet
 
 from dcim.models import Device, Interface
+from ipam.fields import IPNetworkField, IPAddressField
 
 from netbox.models import NetBoxModel
 from netbox.search import SearchIndex, register_search
-
-
 
 
 #
@@ -172,5 +171,138 @@ class SecurityZoneIndex(SearchIndex):
         ("name", 100),
         ("device", 200),
         ("description", 300),
+        ("comments", 5000),
+    )
+
+#
+# Address Book - Address
+#
+
+class AddressBookAddress(NetBoxModel):
+    device = models.ForeignKey(
+        Device,
+        on_delete=models.CASCADE,
+        null=False,
+        blank=False,
+    )
+    name = models.CharField(
+        verbose_name=_('Address Name'),
+        max_length=64,
+        blank=False,
+    )
+    address = IPNetworkField(
+        verbose_name=_('Address'),
+        help_text=_('IPv4 or IPv6 address with mask')
+    )
+    is_global = models.BooleanField(
+        default=False,
+        verbose_name=_('Global'),
+    )
+    security_zone = models.ForeignKey(
+        SecurityZone,
+        on_delete=models.CASCADE,
+        null=False,
+        blank=False,
+    )
+    comments = models.TextField(
+        verbose_name=_('Comments'),
+        blank=True
+    )
+
+    class Meta:
+        verbose_name = _("Address")
+        verbose_name_plural = _("Addresses")
+        ordering = ['device','name']
+        constraints = [
+            models.UniqueConstraint(
+                fields=['device','name','address','is_global','security_zone'],
+                name='unique_security_addressbook_address'
+            )
+        ]
+        indexes = [
+            models.Index(fields=['device','name'], name='idx_security_adressbook'),
+        ] 
+
+    def __str__(self):
+        return self.name
+        
+    def get_absolute_url(self):
+        return reverse('plugins:netbox_juniper:addressbookaddress', args=[self.pk])
+
+@register_search
+class AddressBookAddressIndex(SearchIndex):
+    model = AddressBookAddress
+    fields = (
+        ("device", 100),
+        ("name", 100),
+        ("address", 300),
+        ("comments", 5000),
+    )
+
+
+#
+# Address Book - Address Set
+#
+
+class AddressBookAddressSet(NetBoxModel):
+    device = models.ForeignKey(
+        Device,
+        on_delete=models.CASCADE,
+        null=False,
+        blank=False,
+    )
+    name = models.CharField(
+        verbose_name=_('Address Set'),
+        max_length=64,
+        blank=False,
+    )
+    address = models.ManyToManyField(
+        AddressBookAddress,
+        blank=False,
+        verbose_name=_('Addresses'),
+        help_text=_('Addresses belonging to this address set')
+    )
+    is_global = models.BooleanField(
+        default=False,
+        verbose_name=_('Global'),
+    )   
+    security_zone = models.ForeignKey(
+        SecurityZone,
+        on_delete=models.CASCADE,
+        null=False,
+        blank=False,
+    )   
+    comments = models.TextField(
+        verbose_name=_('Comments'),
+        blank=True
+    )
+
+    class Meta:
+        verbose_name = _("Address Set")
+        verbose_name_plural = _("Address Sets")
+        ordering = ['device','name']
+        constraints = [
+            models.UniqueConstraint(
+                fields=['device','name','address','is_global','security_zone'],
+                name='unique_security_addressbook_address_set'
+            )
+        ]
+        indexes = [
+            models.Index(fields=['device','name'], name='idx_security_address_set'),
+        ]
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('plugins:netbox_juniper:addressbookaddressset', args=[self.pk])
+
+@register_search
+class AddressBookAddressSetIndex(SearchIndex):
+    model = AddressBookAddressSet
+    fields = (
+        ("device", 100),
+        ("name", 100),
+        ("address", 300),
         ("comments", 5000),
     )
