@@ -1,6 +1,15 @@
 import django_filters
 from django.db.models import Q
 from netbox.filtersets import NetBoxModelFilterSet
+from django.utils.translation import gettext as _
+
+from utilities.filters import (
+    ContentTypeFilter,
+    MultiValueCharFilter,
+    MultiValueNumberFilter,
+    NumericArrayFilter,
+    TreeNodeMultipleChoiceFilter,
+)
 
 from netbox_juniper.models.security import *
 
@@ -25,3 +34,31 @@ class SecurityZoneFilterSet(NetBoxModelFilterSet):
             | Q(comments__icontains=value)
         )
         return queryset.filter(qs_filter)
+
+#
+# Address Book - Address
+#
+
+class AddressBookAddressFilterSet(NetBoxModelFilterSet):
+
+    address = MultiValueCharFilter(
+        method='filter_prefix',
+        label=_('Address'),
+    )
+
+    class Meta:
+        model = AddressBookAddress
+        fields = ('id', 'device', 'name', 'address', 'is_global', 'security_zone', 'comments')
+
+    def search(self, queryset, name, value):
+        if not value.strip():
+            return queryset
+        qs_filter = (
+            Q(device__icontains=value)
+            | Q(name__icontains=value)
+            | Q(address__icontains=value)
+            | Q(security_zone__icontains=value)
+            | Q(comments__icontains=value)
+        )
+        return queryset.filter(qs_filter)
+

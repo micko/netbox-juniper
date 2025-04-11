@@ -1,6 +1,10 @@
 from django.utils.translation import gettext_lazy as _
 from netbox.plugins import PluginMenuButton, PluginMenuItem, PluginMenu
 
+#
+# Firewall
+#
+
 firewall_filter_item = PluginMenuItem(
     link="plugins:netbox_juniper:firewallfilter_list",
     link_text=_("Filters"),
@@ -56,6 +60,24 @@ security_zone_item = PluginMenuItem(
     ),
 )
 
+security_addressbook_addrss_item = PluginMenuItem(
+    link="plugins:netbox_juniper:addressbookaddress",
+    link_text=_("Addresses"),
+    buttons=(
+        PluginMenuButton(
+            'plugins:netbox_juniper:addressbookaddress_add',
+            _("Add"),
+            'mdi mdi-plus-thick',
+        ),
+        PluginMenuButton(
+            link='plugins:netbox_juniper:addressbookaddress_import',
+            title='Import',
+            icon_class='mdi mdi-upload',
+        ),
+    ),
+)
+
+
 
 menu = PluginMenu(
     label='Juniper Networks',
@@ -70,7 +92,14 @@ menu = PluginMenu(
         (
             _("Security"),
             (
-                security_zone_item,
+                _("Address Books"),
+                (
+                    security_addressbook_addrss_item
+                ),
+                _("Zones"),
+                (
+                    security_zone_item,
+                )
             ),
         ),
     ),

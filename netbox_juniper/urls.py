@@ -43,4 +43,16 @@ urlpatterns = (
         'model': SecurityZone
     }),
 
+    # Address Book - Address
+    path('security-address-book-address/', AddressBookAddressListView.as_view(), name='addressbookaddress_list'),
+    path('security-address-book-address/add/', AddressBookAddressEditView.as_view(), name='addressbookaddres_add'),
+    path('security-address-book-address/import/', AddressBookAddressBulkImportView.as_view(), name='addressbookaddres_import'),
+    path('security-address-book-address/edit/', AddressBookAddressBulkEditView.as_view(), name='addressbookaddres_bulk_edit'),
+    path('security-address-book-address/<int:pk>/', AddressBookAddressView.as_view(), name='addressbookaddres'),
+    path('security-address-book-address/<int:pk>/edit/', AddressBookAddressEditView.as_view(), name='addressbookaddres_edit'),
+    path('security-address-book-address/<int:pk>/delete/', AddressBookAddressDeleteView.as_view(), name='addressbookaddres_delete'),
+    path('security-address-book-address/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='securityzone_changelog', kwargs={
+        'model': AddressBookAddress
+    }),
+
 )

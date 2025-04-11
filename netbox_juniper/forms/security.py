@@ -12,6 +12,7 @@ from utilities.forms.fields import (
 )
 from utilities.forms.rendering import FieldSet
 from dcim.models import Device, Interface
+from ipam.fields import IPNetworkField, IPAddressField
 from netbox.forms import (
     NetBoxModelForm,
     NetBoxModelBulkEditForm,
@@ -55,30 +56,6 @@ class SecurityZoneForm(NetBoxModelForm):
     )
 
     comments = CommentField()
-
-#    fieldsets = (
-#        FieldSet(
-#            'name', 'device', 'interfaces', 'description', name=_('Zone Info')
-#        ),
-#        FieldSet(
-#            'proto_all', 'proto_bfd', 'proto_bgp', 'proto_dvmrp', 'proto_igmp', 'proto_ldp', 'proto_msdp',
-#            'proto_nhrp', 'proto_ospf', 'proto_ospf3', 'proto_pgm', 'proto_pim', 'proto_rip', 'proto_ripng',
-#            'proto_router_discovery', 'proto_rsvp', 'proto_sap', 'proto_vrrp', name=_('Protocol type of incoming traffic to accept')
-#        ),
-#        FieldSet(
-#            'service_all', 'service_any_service', 'service_appqoe', 'service_bootp', 'service_dhcp', 'service_dhcpv6',
-#            'service_dns', 'service_finger', 'service_ftp', 'service_high_availability', 'service_http', 'service_https',
-#            'service_ident_reset', 'service_ike', 'service_lsping', 'service_lsselfping', 'service_netconf', 'service_ntp',
-#            'service_ping', 'service_r2cp', 'service_reverse_ssh', 'service_reverse_telnet', 'service_rlogin', 'service_rpm',
-#            'service_rsh', 'service_snmp', 'service_snmp_trap', 'service_ssh', 'service_tcp_encap', 'service_telnet',
-#            'service_tftp', 'service_traceroute', 'service_webapi_clear_text', 'service_webapi_ssl', 'service_xnm_clear_text',
-#            'service_xnm_ssl', name=_('Type of incoming system-service traffic to accept')
-#        ),
-#        FieldSet(
-#            'application_tracking', 'enable_reverse_reroute', 'tcp_rst', 'unidirectional_session_refreshing',
-#            name=_('Miscellaneous')
-#        ),
-#    )
 
     class Meta:
         model = SecurityZone
@@ -161,4 +138,83 @@ class SecurityZoneImportForm(NetBoxModelImportForm):
             'name', 'device', 'interfaces', 'host_inbound_traffic_protocols', 'host_inbound_traffic_services',
             'application_tracking', 'enable_reverse_reroute', 'tcp_rst', 'unidirectional_session_refreshing',
             'description', 'comments', 'tags'
+        )
+
+#
+# Address Book
+#
+
+class AddressBookAddressForm(NetBoxModelForm):
+
+    comments = CommentField()
+
+    class Meta:
+        model = AddressBookAddress
+        fields = (
+            'device','name','address','is_global','security_zone',
+            'comments', 'tags'
+        )
+
+class AddressBookAddressFilterForm(NetBoxModelFilterSetForm):
+    model = SecurityZone
+
+    q = forms.CharField(required=False, label="Search")
+
+    name = forms.CharField(max_length=64, required=False)
+
+    device = DynamicModelChoiceField(
+        queryset=Device.objects.all(),
+        required=False,
+    )
+
+    tag = TagFilterField(AddressBookAddress)
+
+
+class AddressBookAddressBulkEditForm(NetBoxModelBulkEditForm):
+    model = AddressBookAddress
+
+    name = forms.CharField(
+        max_length=64,
+        required=False
+    )
+    device = DynamicModelChoiceField(
+        label=_("Device"),
+        queryset=Device.objects.all(),
+        required=True,
+    )
+#    address = IPNetworkField(
+#        queryset=AddressBookAddress.objects.all(),
+#        required=False,
+#    )
+    is_global = forms.BooleanField(
+        required=False,
+    )
+    security_zone = DynamicModelChoiceField(
+        label=_("Security Zone"),
+        queryset=SecurityZone.objects.all(),
+        required=False,
+    )
+    comments = CommentField()
+
+class AddressBookAddressImportForm(NetBoxModelImportForm):
+    device = CSVModelChoiceField(
+        label=_('Device'),
+        queryset=Device.objects.all(),
+        required=True,
+        to_field_name="device",
+        help_text=_("Device Name"),
+    )
+    security_zone = CSVModelMultipleChoiceField(
+        label=_('SecurityZone'),
+        queryset=SecurityZone.objects.all(),
+        required=False,
+        to_field_name="security_zone",
+        help_text=_("Security Zone"),
+    )
+
+    class Meta:
+        model = AddressBookAddress
+        fields = (
+            'device', 'name', 'address','is_global', 'security_zone',
+            'comments', 'tags'
         )
