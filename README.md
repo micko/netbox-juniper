@@ -19,7 +19,7 @@ NetBox Juniper Plugin is designed to help with the configuration of certain Juni
 This module is Alpha at best - USE AT YOUR OWN RISK.
 
 ## Requirements
-* NetBox 4.2.5 or higher
+* NetBox 4.3.0 or higher
 * Python 3.12 or higher
 
 ## HowTo
