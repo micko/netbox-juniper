@@ -1,16 +1,14 @@
 from netbox.views import generic
 from django.db.models import Count
 
-from utilities.permissions import get_permission_for_model
-
 from netbox_juniper.filtersets.security import *
-from netbox_juniper.forms.security import *
+from netbox_juniper.forms import *
 from netbox_juniper.models.security import *
 from netbox_juniper.tables.security import *
 
-#
+################################################################################
 # Security Zone
-#
+################################################################################
 
 class SecurityZoneView(generic.ObjectView):
     queryset = SecurityZone.objects.all()
@@ -22,7 +20,6 @@ class SecurityZoneListView(generic.ObjectListView):
     filterset = SecurityZoneFilterSet
     filterset_form = SecurityZoneFilterForm
     table = SecurityZoneTable
-    permission = 'netbox_juniper.view_security'
 
 
 class SecurityZoneEditView(generic.ObjectEditView):
@@ -51,46 +48,88 @@ class SecurityZoneBulkImportView(generic.BulkImportView):
     queryset = SecurityZone.objects.all()
     model_form = SecurityZoneImportForm
 
-#
-# Address Book - Address
-#
 
-class AddressBookAddressView(generic.ObjectView):
-    queryset = AddressBookAddress.objects.all()
-    table = AddressBookAddressTable
+################################################################################
+# Security Address (Address Book)
+################################################################################
 
-
-class AddressBookAddressListView(generic.ObjectListView):
-    queryset = AddressBookAddress.objects.all()
-    filterset = AddressBookAddressFilterSet
-    filterset_form = AddressBookAddressFilterForm
-    table = AddressBookAddressTable
-    permission = 'netbox_juniper.view_security'
+class SecurityAddressView(generic.ObjectView):
+    queryset = SecurityAddress.objects.all()
+    table = SecurityAddressTable
 
 
-class AddressBookAddressEditView(generic.ObjectEditView):
-    queryset = AddressBookAddress.objects.all()
-    form = AddressBookAddressForm
+class SecurityAddressListView(generic.ObjectListView):
+    queryset = SecurityAddress.objects.all()
+    filterset = SecurityAddressFilterSet
+    filterset_form = SecurityAddressFilterForm
+    table = SecurityAddressTable
 
 
-class AddressBookAddressBulkEditView(generic.BulkEditView):
-    queryset = AddressBookAddress.objects.all()
-    filterset = AddressBookAddressFilterSet
-    table = AddressBookAddressTable
-    form = AddressBookAddressBulkEditForm
+class SecurityAddressEditView(generic.ObjectEditView):
+    queryset = SecurityAddress.objects.all()
+    form = SecurityAddressForm
 
 
-class AddressBookAddressDeleteView(generic.ObjectDeleteView):
-    queryset = AddressBookAddress.objects.all()
-    default_return_url = 'plugins:netbox_juniper:addressbookaddress_list'
+class SecurityAddressBulkEditView(generic.BulkEditView):
+    queryset = SecurityAddress.objects.all()
+    filterset = SecurityAddressFilterSet
+    table = SecurityAddressTable
+    form = SecurityAddressBulkEditForm
 
 
-class AddressBookAddressBulkDeleteView(generic.BulkDeleteView):
-    queryset = AddressBookAddress.objects.all()
-    table = AddressBookAddressTable
+class SecurityAddressDeleteView(generic.ObjectDeleteView):
+    queryset = SecurityAddress.objects.all()
+    default_return_url = 'plugins:netbox_juniper:securityaddress_list'
 
 
-class AddressBookAddressBulkImportView(generic.BulkImportView):
-    queryset = AddressBookAddress.objects.all()
-    model_form = AddressBookAddressImportForm
+class SecurityAddressBulkDeleteView(generic.BulkDeleteView):
+    queryset = SecurityAddress.objects.all()
+    table = SecurityAddressTable
 
+
+class SecurityAddressBulkImportView(generic.BulkImportView):
+    queryset = SecurityAddress.objects.all()
+    model_form = SecurityAddressImportForm
+
+
+################################################################################
+# Security Address Set (Address Book)
+################################################################################
+
+class SecurityAddressSetView(generic.ObjectView):
+    queryset = SecurityAddressSet.objects.all()
+    table = SecurityAddressSetTable
+
+
+class SecurityAddressSetListView(generic.ObjectListView):
+    queryset = SecurityAddressSet.objects.all()
+    filterset = SecurityAddressSetFilterSet
+    filterset_form = SecurityAddressSetFilterForm
+    table = SecurityAddressSetTable
+
+
+class SecurityAddressSetEditView(generic.ObjectEditView):
+    queryset = SecurityAddressSet.objects.all()
+    form = SecurityAddressSetForm
+
+
+class SecurityAddressSetBulkEditView(generic.BulkEditView):
+    queryset = SecurityAddressSet.objects.all()
+    filterset = SecurityAddressSetFilterSet
+    table = SecurityAddressSetTable
+    form = SecurityAddressSetBulkEditForm
+
+
+class SecurityAddressSetDeleteView(generic.ObjectDeleteView):
+    queryset = SecurityAddressSet.objects.all()
+    default_return_url = 'plugins:netbox_juniper:securityaddressset_list'
+
+
+class SecurityAddressSetBulkDeleteView(generic.BulkDeleteView):
+    queryset = SecurityAddressSet.objects.all()
+    table = SecurityAddressSetTable
+
+
+class SecurityAddressSetBulkImportView(generic.BulkImportView):
+    queryset = SecurityAddressSet.objects.all()
+    model_form = SecurityAddressSetImportForm

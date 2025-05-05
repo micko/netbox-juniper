@@ -17,11 +17,9 @@
             <tr>
               <th scope="row">Interfaces</th>
               <td>
-                <ol style="list-style-type: none;">
-                  {% for interface in object.interfaces.all %}
-                  <li>{{ interface }}</li>
-                  {% endfor %}
-                </ol>
+                {% for interface in object.interfaces.all %}
+                {{ interface }}<br />
+                {% endfor %}
               </td>
             </tr>
             <tr>
@@ -31,21 +29,17 @@
             <tr>
               <th scope="row">Protocols</th>
               <td>
-                <ol style="list-style-type: none;">
-                  {% for protocol in object.host_inbound_traffic_protocols %}
-                  <li>{{ protocol }}</li>
-                  {% endfor %}
-                </ol>
+                {% for protocol in object.get_protocols_display %}
+                {{ protocol }}<br />
+                {% endfor %}
               </td>
             </tr>
             <tr>
               <th scope="row">Services</th>
               <td>
-                <ol style="list-style-type: none;">
-                  {% for service in object.host_inbound_traffic_services %}
-                  <li>{{ service }}</li>
-                  {% endfor %}
-                </ol>
+                {% for service in object.get_services_display %}
+                {{ service }}<br />
+                {% endfor %}
               </td>
             </tr>
             <tr>

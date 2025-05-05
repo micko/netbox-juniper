@@ -1,47 +1,43 @@
 from django.utils.translation import gettext_lazy as _
 from netbox.plugins import PluginMenuButton, PluginMenuItem, PluginMenu
 
-#
-# Firewall
-#
-
-firewall_filter_item = PluginMenuItem(
-    link="plugins:netbox_juniper:firewallfilter_list",
-    link_text=_("Filters"),
-    buttons=(
-        PluginMenuButton(
-            'plugins:netbox_juniper:firewallfilter_add',
-            _("Add"),
-            'mdi mdi-plus-thick',
-        ),
-        PluginMenuButton(
-            link='plugins:netbox_juniper:firewallfilter_import',
-            title='Import',
-            icon_class='mdi mdi-upload',
-        ),      
-    ),
-)
-
-firewall_policer_item = PluginMenuItem(
-    link="plugins:netbox_juniper:firewallpolicer_list",
-    link_text=_("Policers"),
-    buttons=(
-        PluginMenuButton(
-            'plugins:netbox_juniper:firewallpolicer_add',
-            _("Add"),
-            'mdi mdi-plus-thick',
-        ),
-        PluginMenuButton(
-            link='plugins:netbox_juniper:firewallpolicer_import',
-            title='Import',
-            icon_class='mdi mdi-upload',
-        ),
-    ),
-)
-
-# 
+################################################################################
 # Security
-#
+################################################################################
+
+security_address_item = PluginMenuItem(
+    link="plugins:netbox_juniper:securityaddress_list",
+    link_text=_("Addresses"),
+    buttons=(
+        PluginMenuButton(
+            'plugins:netbox_juniper:securityaddress_add',
+            _("Add"),
+            'mdi mdi-plus-thick',
+        ),
+        PluginMenuButton(
+            link='plugins:netbox_juniper:securityaddress_import',
+            title='Import',
+            icon_class='mdi mdi-upload',
+        ),
+    ),
+)
+
+security_address_set_item = PluginMenuItem(
+    link="plugins:netbox_juniper:securityaddressset_list",
+    link_text=_("Address Sets"),
+    buttons=(
+        PluginMenuButton(
+            'plugins:netbox_juniper:securityaddressset_add',
+            _("Add"),
+            'mdi mdi-plus-thick',
+        ),
+        PluginMenuButton(
+            link='plugins:netbox_juniper:securityaddressset_import',
+            title='Import',
+            icon_class='mdi mdi-upload',
+        ),
+    ),
+)
 
 security_zone_item = PluginMenuItem(
     link="plugins:netbox_juniper:securityzone_list",
@@ -60,46 +56,15 @@ security_zone_item = PluginMenuItem(
     ),
 )
 
-security_addressbook_addrss_item = PluginMenuItem(
-    link="plugins:netbox_juniper:addressbookaddress",
-    link_text=_("Addresses"),
-    buttons=(
-        PluginMenuButton(
-            'plugins:netbox_juniper:addressbookaddress_add',
-            _("Add"),
-            'mdi mdi-plus-thick',
-        ),
-        PluginMenuButton(
-            link='plugins:netbox_juniper:addressbookaddress_import',
-            title='Import',
-            icon_class='mdi mdi-upload',
-        ),
-    ),
-)
-
-
-
 menu = PluginMenu(
     label='Juniper Networks',
     groups=(
         (
-            _("Firewall"),
-            (
-                firewall_filter_item,
-                firewall_policer_item,
-            ),
-        ),
-        (
             _("Security"),
             (
-                _("Address Books"),
-                (
-                    security_addressbook_addrss_item
-                ),
-                _("Zones"),
-                (
-                    security_zone_item,
-                )
+                security_address_item,
+                security_address_set_item,
+                security_zone_item,
             ),
         ),
     ),

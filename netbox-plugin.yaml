@@ -2,4 +2,6 @@ version: 0.1
 package_name: netbox-juniper
 compatibility:
   - release: 0.1
-    netbox_min: 4.2.5
+    netbox_min: 4.0.0
+  - release: 0.2
+    netbox_min: 4.3.0

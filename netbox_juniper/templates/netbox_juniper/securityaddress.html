@@ -3,7 +3,7 @@
   <div class="row mb-3">
     <div class="col col-md-6">
       <div class="card">
-        <h5 class="card-header">Firewall Policer</h5>
+        <h5 class="card-header">Security Adress</h5>
         <div class="card-body">
           <table class="table table-hover attr-table">
             <tr>
@@ -14,26 +14,20 @@
               <th scope="row">Device</th>
               <td>{{ object.device }}</td>
             </tr>
+
             <tr>
-              <th scope="row">Filter Specific</th>
-              <td>{{ object.filter_specific }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Bandwidth Limit</th>
-              <td>{{ object.bw_limit }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Bandwidth Percent</th>
-              <td>{{ object.bw_percent }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Burst Size Limit</th>
-              <td>{{ object.burst_limit }}</td>
+              <th scope="row">Address</th>
+              <td>{{ object.address }}</td>
             </tr>
 
             <tr>
-              <th scope="row">Action</th>
-              <td>{{ object.action }}</td>
+              <th scope="row">Global</th>
+              <td>{{ object.is_global }}</td>
+            </tr>
+
+            <tr>
+              <th scope="row">Security Zone</th>
+              <td>{{ object.security_zone }}</td>
             </tr>
           </table>
         </div>

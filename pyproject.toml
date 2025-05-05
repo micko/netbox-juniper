@@ -1,6 +1,6 @@
 [project]
 name = "netbox-juniper"
-version = "0.1"
+version = "0.2"
 description = "Juniper Networks Plugin for NetBox."
 authors = [
     {name="Dragan Mickovic", email="dmickovic@gmail.com"},

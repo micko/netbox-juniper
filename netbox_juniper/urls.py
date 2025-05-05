@@ -7,28 +7,28 @@ from netbox_juniper.views import *
 
 urlpatterns = (
 
-    # Firewall Filter
-    path('firewall-filter/', FirewallFilterListView.as_view(), name='firewallfilter_list'),
-    path('firewall-filter/add/', FirewallFilterEditView.as_view(), name='firewallfilter_add'),
-    path('firewall-filter/import/', FirewallFilterBulkImportView.as_view(), name='firewallfilter_import'),
-    path('firewall-filter/edit/', FirewallFilterBulkEditView.as_view(), name='firewallfilter_bulk_edit'),
-    path('firewall-filter/<int:pk>/', FirewallFilterView.as_view(), name='firewallfilter'),
-    path('firewall-filter/<int:pk>/edit/', FirewallFilterEditView.as_view(), name='firewallfilter_edit'),
-    path('firewall-filter/<int:pk>/delete/', FirewallFilterDeleteView.as_view(), name='firewallfilter_delete'),
-    path('firewall-filter/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='firewallfilter_changelog', kwargs={
-        'model': FirewallFilter
+    # Security Address
+    path('security-address/', SecurityAddressListView.as_view(), name='securityaddress_list'),
+    path('security-address/add/', SecurityAddressEditView.as_view(), name='securityaddress_add'),
+    path('security-address/import/', SecurityAddressBulkImportView.as_view(), name='securityaddress_import'),
+    path('security-address/edit/', SecurityAddressBulkEditView.as_view(), name='securityaddress_bulk_edit'),
+    path('security-address/<int:pk>/', SecurityAddressView.as_view(), name='securityaddress'),
+    path('security-address/<int:pk>/edit/', SecurityAddressEditView.as_view(), name='securityaddress_edit'),
+    path('security-address/<int:pk>/delete/', SecurityAddressDeleteView.as_view(), name='securityaddress_delete'),
+    path('security-address/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='securityaddress_changelog', kwargs={
+        'model': SecurityAddress
     }),
 
-    # Firewall Policer
-    path('firewall-policer/', FirewallPolicerListView.as_view(), name='firewallpolicer_list'),
-    path('firewall-policer/add/', FirewallPolicerEditView.as_view(), name='firewallpolicer_add'),
-    path('firewall-policer/import/', FirewallPolicerBulkImportView.as_view(), name='firewallpolicer_import'),
-    path('firewall-policer/edit/', FirewallPolicerBulkEditView.as_view(), name='firewallpolicer_bulk_edit'),
-    path('firewall-policer/<int:pk>/', FirewallPolicerView.as_view(), name='firewallpolicer'),
-    path('firewall-policer/<int:pk>/edit/', FirewallPolicerEditView.as_view(), name='firewallpolicer_edit'),
-    path('firewall-policer/<int:pk>/delete/', FirewallPolicerDeleteView.as_view(), name='firewallpolicer_delete'),
-    path('firewall-policer/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='firewallpolicer_changelog', kwargs={
-        'model': FirewallPolicer
+    # Security Address Set
+    path('security-address-set/', SecurityAddressSetListView.as_view(), name='securityaddressset_list'),
+    path('security-address-set/add/', SecurityAddressSetEditView.as_view(), name='securityaddressset_add'),
+    path('security-address-set/import/', SecurityAddressSetBulkImportView.as_view(), name='securityaddressset_import'),
+    path('security-address-set/edit/', SecurityAddressSetBulkEditView.as_view(), name='securityaddressset_bulk_edit'),
+    path('security-address-set/<int:pk>/', SecurityAddressSetView.as_view(), name='securityaddressset'),
+    path('security-address-set/<int:pk>/edit/', SecurityAddressSetEditView.as_view(), name='securityaddressset_edit'),
+    path('security-address-set/<int:pk>/delete/', SecurityAddressSetDeleteView.as_view(), name='securityaddressset_delete'),
+    path('security-address-set/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='securityaddressset_changelog', kwargs={
+        'model': SecurityAddressSet
     }),
 
     # Security Zone
@@ -41,18 +41,6 @@ urlpatterns = (
     path('security-zone/<int:pk>/delete/', SecurityZoneDeleteView.as_view(), name='securityzone_delete'),
     path('security-zone/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='securityzone_changelog', kwargs={
         'model': SecurityZone
-    }),
-
-    # Address Book - Address
-    path('security-address-book-address/', AddressBookAddressListView.as_view(), name='addressbookaddress_list'),
-    path('security-address-book-address/add/', AddressBookAddressEditView.as_view(), name='addressbookaddres_add'),
-    path('security-address-book-address/import/', AddressBookAddressBulkImportView.as_view(), name='addressbookaddres_import'),
-    path('security-address-book-address/edit/', AddressBookAddressBulkEditView.as_view(), name='addressbookaddres_bulk_edit'),
-    path('security-address-book-address/<int:pk>/', AddressBookAddressView.as_view(), name='addressbookaddres'),
-    path('security-address-book-address/<int:pk>/edit/', AddressBookAddressEditView.as_view(), name='addressbookaddres_edit'),
-    path('security-address-book-address/<int:pk>/delete/', AddressBookAddressDeleteView.as_view(), name='addressbookaddres_delete'),
-    path('security-address-book-address/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='securityzone_changelog', kwargs={
-        'model': AddressBookAddress
     }),
 
 )

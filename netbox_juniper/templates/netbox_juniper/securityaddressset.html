@@ -3,7 +3,7 @@
   <div class="row mb-3">
     <div class="col col-md-6">
       <div class="card">
-        <h5 class="card-header">Firewall Filter</h5>
+        <h5 class="card-header">Security Adress Set</h5>
         <div class="card-body">
           <table class="table table-hover attr-table">
             <tr>
@@ -13,6 +13,23 @@
             <tr>
               <th scope="row">Device</th>
               <td>{{ object.device }}</td>
+            </tr>
+
+            <tr>
+              <th scope="row">Address</th>
+              <td>
+                {% for set in object.address.all %}
+                {{ set }}<br />
+                {% endfor %}
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Global</th>
+              <td>{{ object.is_global }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Security Zone</th>
+              <td>{{ object.security_zone }}</td>
             </tr>
           </table>
         </div>
