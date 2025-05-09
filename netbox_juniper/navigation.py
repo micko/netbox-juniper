@@ -2,6 +2,44 @@ from django.utils.translation import gettext_lazy as _
 from netbox.plugins import PluginMenuButton, PluginMenuItem, PluginMenu
 
 ################################################################################
+# Applications
+################################################################################
+
+application_item = PluginMenuItem(
+    link="plugins:netbox_juniper:application_list",
+    link_text=_("Applications"),
+    buttons=(
+        PluginMenuButton(
+            'plugins:netbox_juniper:application_add',
+            _("Add"),
+            'mdi mdi-plus-thick',
+        ),
+        PluginMenuButton(
+            link='plugins:netbox_juniper:application_import',
+            title='Import',
+            icon_class='mdi mdi-upload',
+        ),
+    ),
+)
+
+application_set_item = PluginMenuItem(
+    link="plugins:netbox_juniper:applicationset_list",
+    link_text=_("Application Sets"),
+    buttons=(
+        PluginMenuButton(
+            'plugins:netbox_juniper:applicationset_add',
+            _("Add"),
+            'mdi mdi-plus-thick',
+        ),
+        PluginMenuButton(
+            link='plugins:netbox_juniper:applicationset_import',
+            title='Import',
+            icon_class='mdi mdi-upload',
+        ),
+    ),
+)
+
+################################################################################
 # Security
 ################################################################################
 
@@ -56,9 +94,20 @@ security_zone_item = PluginMenuItem(
     ),
 )
 
+################################################################################
+# Menu
+################################################################################
+
 menu = PluginMenu(
     label='Juniper Networks',
     groups=(
+        (
+            _("Applications"),
+            (
+                application_item,
+                application_set_item,
+            ),
+        ),
         (
             _("Security"),
             (

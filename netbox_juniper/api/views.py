@@ -6,6 +6,18 @@ from netbox_juniper.models import *
 from netbox_juniper.filtersets import *
 
 ################################################################################
+# Applications
+################################################################################
+
+class ApplicationViewSet(NetBoxModelViewSet):
+    queryset = Application.objects.prefetch_related('tags')
+    serializer_class = ApplicationSerializer
+
+class ApplicationSetViewSet(NetBoxModelViewSet):
+    queryset = ApplicationSet.objects.prefetch_related('application','tags')
+    serializer_class = ApplicationSetSerializer
+
+################################################################################
 # Security
 ################################################################################
 

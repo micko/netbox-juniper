@@ -22,7 +22,83 @@ from netbox.forms import (
     NetBoxModelImportForm,
 )
 
+from netbox_juniper.models.applications import *
 from netbox_juniper.models.security import *
+
+################################################################################
+# Application
+################################################################################
+
+class ApplicationBulkEditForm(NetBoxModelBulkEditForm):
+
+    application_protocol = forms.CharField(
+        required=False,
+    )
+
+    inactivity_timeout = forms.CharField(
+        required=False,
+    )
+
+    protocol = forms.CharField(
+        required=False,
+    )
+
+    source_port = forms.CharField(
+        required=False,
+    )
+
+    destination_port = forms.CharField(
+        required=False,
+    )
+
+    icmp_code = forms.CharField(
+        required=False,
+    )
+
+    icmp_type = forms.CharField(
+        required=False,
+    )
+
+    icmp6_code = forms.CharField(
+        required=False,
+    )
+
+    icmp6_type = forms.CharField(
+        required=False,
+    )
+
+    description = forms.CharField(
+        required=False,
+    )
+
+    comments = CommentField()
+
+    model = Application
+
+    nullable_fields = (
+        'application_protocol', 'inactivity_timeout', 'protocol', 'source_port',
+        'destination_port', 'icmp_code', 'icmp_type', 'icmp6_code', 'icmp6_type',
+        'description','comments',
+    )
+
+################################################################################
+# Application Set
+################################################################################
+
+class ApplicationSetBulkEditForm(NetBoxModelBulkEditForm):
+
+    description = forms.CharField(
+        required=False,
+    )
+
+    comments = CommentField()
+
+    model = ApplicationSet
+
+    nullable_fields = (
+        'device', 'application', 'description','comments',
+    )
+
 
 ################################################################################
 # Security Zone

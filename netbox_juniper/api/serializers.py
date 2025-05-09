@@ -4,6 +4,46 @@ from netbox_juniper.models import *
 
 
 ################################################################################
+# Application
+################################################################################
+
+class ApplicationSerializer(NetBoxModelSerializer):
+    url = HyperlinkedIdentityField(
+        view_name='plugins-api:netbox_juniper-api:application-detail'
+    )
+
+    class Meta:
+        model = Application
+        fields = (
+            'id', 'url', 'display', 'name', 'is_global', 'device', 'application_protocol',
+            'inactivity_timeout', 'protocol', 'source_port', 'destination_port',
+            'icmp_code', 'icmp_type', 'icmp6_code', 'icmp6_type', 'description',
+            'comments', 'tags', 'custom_fields', 'created', 'last_updated',
+        )
+        brief_fields = (
+            'id', 'url', 'display', 'name',
+        )
+
+################################################################################
+# Application Set
+################################################################################
+
+class ApplicationSetSerializer(NetBoxModelSerializer):
+    url = HyperlinkedIdentityField(
+        view_name='plugins-api:netbox_juniper-api:applicationset-detail'
+    )
+
+    class Meta:
+        model = ApplicationSet
+        fields = (
+            'id', 'url', 'display', 'name', 'is_global', 'device', 'application',
+            'description', 'comments', 'tags', 'custom_fields', 'created', 'last_updated',
+        )
+        brief_fields = (
+            'id', 'url', 'display', 'name',
+        )
+
+################################################################################
 # Security Zone
 ################################################################################
 
@@ -16,7 +56,7 @@ class SecurityZoneSerializer(NetBoxModelSerializer):
         model = SecurityZone
         fields = (
             'id', 'url', 'display', 'name', 'device', 'interfaces', 'protocols', 'services', 'application_tracking',
-             'enable_reverse_reroute', 'tcp_rst', 'unidirectional_session_refreshing', 'description', 
+            'enable_reverse_reroute', 'tcp_rst', 'unidirectional_session_refreshing', 'description', 
             'comments', 'tags', 'custom_fields', 'created', 'last_updated',
         )
         brief_fields = (

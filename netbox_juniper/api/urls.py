@@ -6,6 +6,13 @@ app_name = 'netbox_juniper'
 router = NetBoxRouter()
 
 ################################################################################
+# Applications
+################################################################################
+
+router.register('application', views.ApplicationViewSet)
+router.register('application-set', views.ApplicationSetViewSet)
+
+################################################################################
 # Security
 ################################################################################
 

@@ -22,7 +22,57 @@ from netbox.forms import (
     NetBoxModelImportForm,
 )
 
+from netbox_juniper.models.applications import *
 from netbox_juniper.models.security import *
+
+################################################################################
+# Application
+################################################################################
+
+class ApplicationImportForm(NetBoxModelImportForm):
+    device = CSVModelChoiceField(
+        label=_('Device'),
+        queryset=Device.objects.all(),
+        required=False,
+        to_field_name="device",
+        help_text=_("Device"),
+    )
+
+    class Meta:
+        model = Application
+        fields = (
+            'name', 'is_global', 'device', 'application_protocol', 'inactivity_timeout',
+            'protocol', 'source_port', 'destination_port', 'icmp_code', 'icmp_type',
+            'icmp6_code', 'icmp6_type', 'description', 'comments', 'tags'
+        )
+
+################################################################################
+# Application Set
+################################################################################
+
+class ApplicationSetImportForm(NetBoxModelImportForm):
+    device = CSVModelChoiceField(
+        label=_('Device'),
+        queryset=Device.objects.all(),
+        required=False,
+        to_field_name="device",
+        help_text=_("Device"),
+    )
+
+    application = CSVModelMultipleChoiceField(
+        label=_('Application'),
+        queryset=Application.objects.all(),
+        required=False,
+        to_field_name="application",
+        help_text=_("Application"),
+    )
+
+    class Meta:
+        model = ApplicationSet
+        fields = (
+            'name', 'is_global', 'device', 'application', 'description', 'comments', 'tags'
+        )
+
 
 ################################################################################
 # Security Zone

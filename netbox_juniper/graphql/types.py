@@ -12,6 +12,39 @@ from netbox_juniper.models import *
 
 from . filters import *
 
+
+################################################################################
+# Application
+################################################################################
+
+@strawberry_django.type(Application, fields="__all__", filters=ApplicationFilter)
+class ApplicationType(NetBoxObjectType):
+    name: str
+    is_global: bool | None
+    device: Annotated["DeviceType", strawberry.lazy("dcim.graphql.types")] | None
+    application_protocol: str | None
+    inactivity_timeout: str | None
+    protocol: str | None
+    source_port: str | None
+    destination_port: str | None
+    icmp_code: str | None
+    icmp_type: str | None
+    icmp6_code: str | None
+    icmp6_type: str | None
+    description: str | None
+
+################################################################################
+# Application Set
+################################################################################
+
+@strawberry_django.type(ApplicationSet, fields="__all__", filters=ApplicationSetFilter)
+class ApplicationSetType(NetBoxObjectType):
+    name: str
+    is_global: bool | None
+    device: Annotated["DeviceType", strawberry.lazy("dcim.graphql.types")] | None
+    application: Annotated["ApplicationType", strawberry.lazy("netbox_juniper.graphql.types")] | None
+    description: str | None
+
 ################################################################################
 # Security Zone
 ################################################################################

@@ -12,6 +12,47 @@ from ipam.graphql.filters import IPAddressFilter, PrefixFilter
 from netbox_juniper.models import *
 
 ################################################################################
+# Application
+################################################################################
+
+@strawberry_django.filter(Application, lookups=True)
+class ApplicationFilter(NetBoxModelFilterMixin):
+    name: FilterLookup[str] | None = strawberry_django.filter_field()
+    is_global: FilterLookup[bool] | None = strawberry_django.filter_field()
+    device: (
+        Annotated["DeviceFilter", strawberry.lazy("dcim.graphql.filters")]
+        | None
+    ) = strawberry_django.filter_field()
+    application_protocol: FilterLookup[str] | None = strawberry_django.filter_field()
+    inactivity_timeout: FilterLookup[str] | None = strawberry_django.filter_field()
+    protocol: FilterLookup[str] | None = strawberry_django.filter_field()
+    source_port: FilterLookup[str] | None = strawberry_django.filter_field()
+    destination_port: FilterLookup[str] | None = strawberry_django.filter_field()
+    icmp_code: FilterLookup[str] | None = strawberry_django.filter_field()
+    icmp_type: FilterLookup[str] | None = strawberry_django.filter_field()
+    icmp6_code: FilterLookup[str] | None = strawberry_django.filter_field()
+    icmp6_type: FilterLookup[str] | None = strawberry_django.filter_field()
+    description: FilterLookup[str] | None = strawberry_django.filter_field()
+
+################################################################################
+# Application Set
+################################################################################
+
+@strawberry_django.filter(ApplicationSet, lookups=True)
+class ApplicationSetFilter(NetBoxModelFilterMixin):
+    name: FilterLookup[str] | None = strawberry_django.filter_field()
+    is_global: FilterLookup[bool] | None = strawberry_django.filter_field()
+    device: (
+        Annotated["DeviceFilter", strawberry.lazy("dcim.graphql.filters")]
+        | None
+    ) = strawberry_django.filter_field()
+    application: (
+        Annotated['ApplicationFilter', strawberry.lazy('netbox_juniper.graphql.filters')]
+        | None
+    ) = strawberry_django.filter_field()
+    description: FilterLookup[str] | None = strawberry_django.filter_field()
+
+################################################################################
 # Security Zone
 ################################################################################
 

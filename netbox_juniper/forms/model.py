@@ -20,7 +20,80 @@ from netbox.forms import (
     NetBoxModelImportForm,
 )
 
+from netbox_juniper.models.applications import *
 from netbox_juniper.models.security import *
+
+################################################################################
+# Application
+################################################################################
+
+class ApplicationForm(NetBoxModelForm):
+    device = DynamicModelChoiceField(
+        queryset=Device.objects.all(),
+        required=False,
+        label=_('Device')
+    )
+
+    name = forms.CharField(
+        max_length=64,
+        required=True,
+        label=_('Name')
+    )
+
+    is_global = forms.BooleanField(
+        required=False,
+    )
+
+    comments = CommentField()
+
+    class Meta:
+        model = Application
+        fields = (
+            'name','is_global','device','application_protocol','inactivity_timeout',
+            'protocol', 'source_port', 'destination_port', 'icmp_code', 'icmp_type',
+            'icmp6_code', 'icmp6_type', 'description',
+            'comments', 'tags'
+        )
+
+################################################################################
+# Application Set
+################################################################################
+
+class ApplicationSetForm(NetBoxModelForm):
+    device = DynamicModelChoiceField(
+        queryset=Device.objects.all(),
+        required=False,
+        label=_('Device')
+    )
+
+    name = forms.CharField(
+        max_length=64,
+        required=True,
+        label=_('Name')
+    )
+
+    is_global = forms.BooleanField(
+        required=False,
+    )
+
+    application = DynamicModelMultipleChoiceField(
+        label=_('Applications'),
+        queryset=Application.objects.all(),
+        required=False,
+        query_params={
+            'application_id': '$application',
+        }
+    )
+
+    comments = CommentField()
+
+    class Meta:
+        model = ApplicationSet
+        fields = (
+            'name','is_global','device','application',
+            'comments', 'tags'
+        )
+
 
 ################################################################################
 # Security Zone
