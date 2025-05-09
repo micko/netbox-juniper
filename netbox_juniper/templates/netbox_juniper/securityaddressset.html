@@ -1,4 +1,5 @@
 {% extends 'generic/object.html' %}
+{% load json_tags %}
 {% block content %}
   <div class="row mb-3">
     <div class="col col-md-6">
@@ -18,21 +19,25 @@
             <tr>
               <th scope="row">Address</th>
               <td>
-                {% for set in object.address.all %}
-                {{ set }}<br />
+                {% for address in object.address.all %}
+                {{ address | linkify }} ({{ address.address }})<br />
                 {% endfor %}
               </td>
             </tr>
+
             <tr>
               <th scope="row">Global</th>
               <td>{{ object.is_global }}</td>
             </tr>
+
             <tr>
               <th scope="row">Security Zone</th>
               <td>{{ object.security_zone }}</td>
             </tr>
+
           </table>
         </div>
+
       </div>
       {% include 'inc/panels/custom_fields.html' %}
     </div>
